@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRH & SST Soluções Empresariais | Gestão que protege pessoas e negócios</title>
+    
+    <!-- Fonts: Plus Jakarta Sans for a highly legible, premium corporate geometry -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <!-- Tailwind Configuration -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            navy: '#1B2A4A',
+                            navyLight: '#263B69',
+                            navyDark: '#121D33',
+                            green: '#2E9E3A',
+                            greenLight: '#39C248',
+                            greenDark: '#237A2D',
+                        }
+                    },
+                    boxShadow: {
+                        'corporate': '0 4px 24px -6px rgba(27, 42, 74, 0.08)',
+                        'float': '0 20px 40px -15px rgba(27, 42, 74, 0.15)',
+                    },
+                    backgroundImage: {
+                        'grid-pattern': 'url("data:image/svg+xml,%3Csvg width=\'40\' height=\'40\' viewBox=\'0 0 40 40\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M0 0h40v40H0V0zm1 1h38v38H1V1z\' fill=\'%23ffffff\' fill-opacity=\'0.03\' fill-rule=\'evenodd\'/%3E%3C/svg%3E")',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Micro-Architecture & Physics -->
+    <style>
+        /* Base Resets & Typography Polish */
+        body {
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            background-color: #FAFAFA;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAFAFA;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        /* Interaction States & Animations */
+        .hover-lift {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -15px rgba(27, 42, 74, 0.12);
+        }
+
+        /* Staggered Reveal Animation Setup */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Accordion Smooth Height */
+        .faq-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.3s ease-out;
+        }
+        .faq-content.open {
+            grid-template-rows: 1fr;
+        }
+        .faq-inner {
+            overflow: hidden;
+        }
+        
+        /* Floating decorative blobs for Hero */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        .animate-float-delayed {
+            animation: float 6s ease-in-out 3s infinite;
+        }
+
+        /* Outline button focus */
+        .btn-focus-ring:focus-visible {
+            outline: 2px solid #2E9E3A;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="text-slate-800 relative">
+
+    <!-- 1. Sticky Header -->
+    <header id="main-header" class="fixed top-0 w-full z-50 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Logo area -->
+            <a href="#" class="flex items-center gap-2 group focus:outline-none">
+                <div class="w-10 h-10 rounded-lg bg-brand-navy flex items-center justify-center text-white font-bold text-xl group-hover:bg-brand-navyLight transition-colors">
+                    S
+                </div>
+                <div class="flex flex-col leading-tight">
+                    <span class="font-bold text-brand-navy text-lg tracking-tight">SRH & SST</span>
+                    <span class="text-[10px] text-slate-500 font-medium tracking-wider uppercase">Soluções Empresariais</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#solucoes" class="text-sm font-semibold text-slate-600 hover:text-brand-navy transition-colors">Nossas Soluções</a>
+                <a href="#diferenciais" class="text-sm font-semibold text-slate-600 hover:text-brand-navy transition-colors">Diferenciais</a>
+                <a href="#sobre" class="text-sm font-semibold text-slate-600 hover:text-brand-navy transition-colors">Sobre Nós</a>
+                <a href="#contato" class="inline-flex items-center gap-2 bg-brand-green hover:bg-brand-greenLight text-white px-5 py-2.5 rounded-md font-semibold text-sm transition-colors shadow-sm focus:outline-none btn-focus-ring">
+                    <i class="ph ph-whatsapp text-lg"></i>
+                    Fale no WhatsApp
+                </a>
+            </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="lg:hidden text-brand-navy p-2 focus:outline-none focus:ring-2 focus:ring-brand-green rounded" aria-label="Abrir menu">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 2. Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 bg-brand-navy overflow-hidden min-h-[90dvh] flex items-center">
+        <!-- Subtly textured background grid to imply structure/data -->
+        <div class="absolute inset-0 bg-grid-pattern opacity-100 pointer-events-none"></div>
+        <!-- Gradient glow for depth -->
+        <div class="absolute top-0 right-0 w-[40vw] h-[40vw] bg-brand-green/10 blur-[120px] rounded-full pointer-events-none translate-x-1/2 -translate-y-1/2"></div>
+        
+        <div class="max-w-[1400px] mx-auto px-6 relative z-10 w-full">
+            <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+                
+                <!-- Left: Typography & CTAs -->
+                <div class="reveal-element">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-xs font-semibold tracking-wide uppercase mb-6 backdrop-blur-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span>
+                        Assessoria Integrada B2B
+                    </div>
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white tracking-tight leading-[1.1] mb-6">
+                        Gestão que protege <br class="hidden md:block"/>
+                        <span class="text-brand-green">pessoas e negócios.</span>
+                    </h1>
+                    <p class="text-lg md:text-xl text-slate-300 font-medium mb-10 max-w-2xl leading-relaxed">
+                        Integramos Recursos Humanos, Saúde Ocupacional e Segurança do Trabalho em uma solução única. Garantimos conformidade eSocial completa para que sua empresa foque no crescimento.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                        <a href="#contato" class="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-brand-green hover:bg-brand-greenLight text-white px-8 py-4 rounded-md font-bold transition-all hover:-translate-y-0.5 shadow-[0_8px_16px_-4px_rgba(46,158,58,0.4)] focus:outline-none btn-focus-ring">
+                            Solicitar Diagnóstico
+                            <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                        <a href="#" class="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-transparent hover:bg-white/5 border border-white/30 text-white px-8 py-4 rounded-md font-bold transition-colors focus:outline-none btn-focus-ring">
+                            <i class="ph-fill ph-whatsapp text-xl"></i>
+                            Falar no WhatsApp
+                        </a>
+                    </div>
+                    
+                    <div class="mt-10 flex items-center gap-4 text-sm text-slate-400 font-medium border-t border-white/10 pt-6">
+                        <div class="flex items-center gap-1.5"><i class="ph-fill ph-check-circle text-brand-green"></i> Conformidade eSocial completa</div>
+                        <div class="flex items-center gap-1.5"><i class="ph-fill ph-shield-check text-brand-green"></i> Foco em segurança jurídica</div>
+                    </div>
+                </div>
+
+                <!-- Right: Abstract Corporate/Trust Visual -->
+                <div class="relative hidden lg:block reveal-element" style="transition-delay: 200ms;">
+                    <!-- Main Image Placholder (High Quality Corporate) -->
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl aspect-[4/5] border border-white/10">
+                        <div class="absolute inset-0 bg-brand-navy/20 mix-blend-multiply z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800" alt="Profissionais em reunião estratégica de negócios" class="object-cover w-full h-full" />
+                    </div>
+
+                    <!-- Floating UI Panel 1: Document Status -->
+                    <div class="absolute -left-12 top-20 bg-white p-4 rounded-xl shadow-float border border-slate-100 flex items-center gap-4 w-64 animate-float z-20">
+                        <div class="w-12 h-12 rounded-full bg-brand-green/10 flex items-center justify-center text-brand-green">
+                            <i class="ph-fill ph-file-text text-2xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Atestados (ASO)</p>
+                            <p class="text-brand-navy font-bold">Controle ativo</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating UI Panel 2: eSocial Transmission -->
+                    <div class="absolute -right-8 bottom-32 bg-white p-4 rounded-xl shadow-float border border-slate-100 w-56 animate-float-delayed z-20">
+                        <div class="flex justify-between items-center mb-2">
+                            <p class="text-xs text-slate-500 font-semibold uppercase">Eventos SST</p>
+                            <span class="flex h-2 w-2">
+                              <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-brand-green opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-green"></span>
+                            </span>
+                        </div>
+                        <p class="text-brand-navy font-bold text-sm mb-1">Carga eSocial enviada</p>
+                        <div class="w-full bg-slate-100 rounded-full h-1.5 mt-2">
+                            <div class="bg-brand-green h-1.5 rounded-full" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Trust Strip -->
+    <section class="py-8 bg-white border-b border-slate-100">
+        <div class="max-w-[1400px] mx-auto px-6 reveal-element">
+            <div class="flex flex-wrap justify-center lg:justify-between items-center gap-8 text-slate-500 font-semibold text-sm">
+                <span class="flex items-center gap-2"><i class="ph-fill ph-map-pin text-brand-navy text-lg"></i> Base Operacional RJ</span>
+                <span class="hidden md:inline-block w-1 h-1 rounded-full bg-slate-300"></span>
+                <span class="flex items-center gap-2"><i class="ph-fill ph-globe-hemisphere-west text-brand-navy text-lg"></i> Atendimento Remoto Nacional</span>
+                <span class="hidden md:inline-block w-1 h-1 rounded-full bg-slate-300"></span>
+                <span class="flex items-center gap-2"><i class="ph-fill ph-buildings text-brand-navy text-lg"></i> Empresas de Pequeno, Médio e Grande Porte</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Core Service Pillars (Services) -->
+    <section id="solucoes" class="py-24 bg-[#FAFAFA]">
+        <div class="max-w-[1400px] mx-auto px-6">
+            
+            <div class="max-w-3xl mb-16 reveal-element">
+                <h2 class="text-brand-green font-bold tracking-widest text-sm uppercase mb-3">Escopo de Atuação</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-brand-navy tracking-tight leading-tight mb-4">
+                    Ecossistema Completo de <br/>Proteção Corporativa
+                </h3>
+                <p class="text-slate-600 text-lg">
+                    Não vendemos laudos. Entregamos um processo gerenciado. Centralize os quatro pilares fundamentais da compliance trabalhista em um único parceiro estratégico.
+                </p>
+            </div>
+
+            <!-- Bento Framework 2x2 -->
+            <div class="grid md:grid-cols-2 gap-6 lg:gap-8">
+                
+                <!-- Pillar 1: RH -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200 hover-lift reveal-element group">
+                    <div class="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center mb-6 group-hover:bg-brand-navy group-hover:text-white transition-colors duration-300">
+                        <i class="ph-fill ph-users-three text-3xl text-brand-navy group-hover:text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-brand-navy mb-3">Recursos Humanos</h4>
+                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                        Apoio completo ao Departamento Pessoal e à gestão de pessoas, da admissão ao desligamento, com consultoria especializada em RH.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                            <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                            Admissões e desligamentos
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                            <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                            Controle de férias e gestão documental
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                            <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                            Apoio ao DP e consultoria em RH
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 2: Saúde Ocupacional -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200 hover-lift reveal-element group" style="transition-delay: 100ms;">
+                    <div class="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center mb-6 group-hover:bg-brand-green group-hover:text-white transition-colors duration-300">
+                        <i class="ph-fill ph-heartbeat text-3xl text-brand-green group-hover:text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-brand-navy mb-3">Saúde Ocupacional</h4>
+                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                        Cuidamos da saúde ocupacional dos seus colaboradores, com gestão do PCMSO, exames e acompanhamento contínuo de vencimentos.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                            <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                            Gestão do PCMSO
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                            <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                            Agendamento de exames e controle de ASOs
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                            <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                            Exames periódicos e acompanhamento de vencimentos
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 3: Segurança do Trabalho -->
+                <div class="bg-white rounded-2xl p-8 border border-slate-200 hover-lift reveal-element group" style="transition-delay: 200ms;">
+                    <div class="w-14 h-14 rounded-xl bg-slate-100 flex items-center justify-center mb-6 group-hover:bg-yellow-500 group-hover:text-white transition-colors duration-300">
+                        <i class="ph-fill ph-warning-circle text-3xl text-yellow-600 group-hover:text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-brand-navy mb-3">Segurança do Trabalho (SST)</h4>
+                    <p class="text-slate-600 mb-6 text-sm leading-relaxed">
+                        Gestão documental de SST e suporte à conformidade legal, do PGR e LTCAT ao controle de EPIs e treinamentos obrigatórios.
+                    </p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                            <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                            Gestão de PGR e LTCAT
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                            <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                            Controle de treinamentos obrigatórios
+                        </li>
+                        <li class="flex items-start gap-2 text-sm text-slate-700">
+                            <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                            Controle e acompanhamento de EPIs
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Pillar 4: eSocial -->
+                <div class="bg-brand-navy rounded-2xl p-8 border border-brand-navyLight hover-lift reveal-element relative overflow-hidden" style="transition-delay: 300ms;">
+                    <!-- Decor -->
+                    <div class="absolute -right-10 -bottom-10 opacity-10">
+                        <i class="ph-fill ph-file-code text-[150px] text-brand-green"></i>
+                    </div>
+                    <div class="relative z-10 w-full h-full flex flex-col">
+                        <div class="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center mb-6 border border-white/20">
+                            <i class="ph-fill ph-cloud-arrow-up text-3xl text-brand-green"></i>
+                        </div>
+                        <h4 class="text-xl font-bold text-white mb-3">Conformidade eSocial SST</h4>
+                        <p class="text-slate-300 mb-6 text-sm leading-relaxed">
+                            Cuidamos do envio dos eventos obrigatórios de SST ao eSocial, com controle de pendências e relatórios de conformidade.
+                        </p>
+                        <ul class="space-y-2 mb-8 mt-auto">
+                            <li class="flex items-start gap-2 text-sm text-slate-200">
+                                <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                                Evento S-2210 (CAT)
+                            </li>
+                            <li class="flex items-start gap-2 text-sm text-slate-200">
+                                <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                                Evento S-2220 (Monitoramento Saúde)
+                            </li>
+                            <li class="flex items-start gap-2 text-sm text-slate-200">
+                                <i class="ph-bold ph-check text-brand-green mt-0.5"></i>
+                                Evento S-2240 (Fatores de Risco)
+                            </li>
+                        </ul>
+                        <a href="#contato" class="text-sm font-bold text-brand-green inline-flex items-center gap-1 hover:text-white transition-colors w-fit">
+                            Garantir Conformidade Agora <i class="ph-bold ph-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Differentiators (Why Us) Asymmetric Layout -->
+    <section id="diferenciais" class="py-24 bg-white">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="grid lg:grid-cols-[1fr_1.5fr] gap-16">
+                
+                <!-- Sticky Left Col -->
+                <div class="lg:sticky lg:top-32 h-fit reveal-element">
+                    <h2 class="text-brand-green font-bold tracking-widest text-sm uppercase mb-3">Vantagem Competitiva</h2>
+                    <h3 class="text-3xl md:text-4xl font-bold text-brand-navy tracking-tight leading-tight mb-6">
+                        O que nos torna o parceiro ideal para a sua empresa
+                    </h3>
+                    <p class="text-slate-600 mb-8">
+                        Nossa arquitetura de serviço foi desenhada para eliminar o atrito operacional. Não entregamos apenas documentos, asseguramos gestão continuada.
+                    </p>
+                    <div class="hidden lg:block w-32 h-1 bg-brand-green"></div>
+                </div>
+
+                <!-- Right Col List -->
+                <div class="space-y-0 relative before:absolute before:inset-0 before:ml-2.5 before:-translate-x-px md:before:mx-auto md:before:translate-x-0 before:h-full before:w-0.5 before:bg-gradient-to-b before:from-transparent before:via-slate-200 before:to-transparent">
+                    
+                    <!-- Item 1 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active reveal-element mb-10 pl-10 md:pl-0">
+                        <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-white bg-brand-green text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 absolute left-0 md:left-1/2 md:-ml-px"></div>
+                        <div class="w-full md:w-5/12 bg-white rounded-xl border border-slate-100 shadow-sm p-6 group-hover:border-brand-green/30 transition-colors">
+                            <h4 class="font-bold text-brand-navy mb-2 flex items-center gap-2">
+                                <i class="ph-duotone ph-headset text-xl text-brand-green"></i> Atendimento Personalizado
+                            </h4>
+                            <p class="text-sm text-slate-600">Não usamos robôs na linha de frente. Células de atendimento dedicadas que conhecem o histórico da sua empresa.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active reveal-element mb-10 pl-10 md:pl-0" style="transition-delay: 100ms;">
+                        <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-white bg-brand-navy text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 absolute left-0 md:left-1/2 md:-ml-px"></div>
+                        <div class="w-full md:w-5/12 bg-white rounded-xl border border-slate-100 shadow-sm p-6 group-hover:border-brand-navy/30 transition-colors">
+                            <h4 class="font-bold text-brand-navy mb-2 flex items-center gap-2">
+                                <i class="ph-duotone ph-arrows-merge text-xl text-brand-green"></i> Gestão Integrada
+                            </h4>
+                            <p class="text-sm text-slate-600">Alinhamento nativo entre os departamentos de RH, SST e a carga do eSocial em um único fluxo de informação.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active reveal-element mb-10 pl-10 md:pl-0" style="transition-delay: 150ms;">
+                        <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-white bg-brand-navy text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 absolute left-0 md:left-1/2 md:-ml-px"></div>
+                        <div class="w-full md:w-5/12 bg-white rounded-xl border border-slate-100 shadow-sm p-6 group-hover:border-brand-navy/30 transition-colors">
+                            <h4 class="font-bold text-brand-navy mb-2 flex items-center gap-2">
+                                <i class="ph-duotone ph-folder-open text-xl text-brand-green"></i> Controle de Documentos
+                            </h4>
+                            <p class="text-sm text-slate-600">Tratamento e arquivamento seguro de todo o arcabouço probatório legal exigido pelas fiscalizações.</p>
+                        </div>
+                    </div>
+
+                    <!-- Item 4 -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active reveal-element mb-10 pl-10 md:pl-0" style="transition-delay: 200ms;">
+                        <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-white bg-brand-green text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 absolute left-0 md:left-1/2 md:-ml-px"></div>
+                        <div class="w-full md:w-5/12 bg-white rounded-xl border border-slate-100 shadow-sm p-6 group-hover:border-brand-green/30 transition-colors">
+                            <h4 class="font-bold text-brand-navy mb-2 flex items-center gap-2">
+                                <i class="ph-duotone ph-calendar-check text-xl text-brand-green"></i> Monitoramento de Prazos
+                            </h4>
+                            <p class="text-sm text-slate-600">Controle ativo de vencimentos de exames (ASO) e treinamentos periódicos, com alertas proativos.</p>
+                        </div>
+                    </div>
+
+                    <!-- (Items 5, 6, 7 compressed for layout elegance but content retained) -->
+                    <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group is-active reveal-element mb-10 pl-10 md:pl-0" style="transition-delay: 250ms;">
+                        <div class="flex items-center justify-center w-6 h-6 rounded-full border-4 border-white bg-slate-300 text-white shadow shrink-0 md:order-1 md:group-odd:-translate-x-1/2 md:group-even:translate-x-1/2 absolute left-0 md:left-1/2 md:-ml-px"></div>
+                        <div class="w-full md:w-5/12 bg-slate-50 flex flex-col gap-4 rounded-xl border border-slate-100 p-6">
+                            <div>
+                                <h4 class="font-bold text-brand-navy text-sm mb-1 flex items-center gap-2"><i class="ph-fill ph-book-open text-brand-green"></i> Atualização Legal Contínua</h4>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-navy text-sm mb-1 flex items-center gap-2"><i class="ph-fill ph-handshake text-brand-green"></i> Rede de Parceiros Qualificada</h4>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-brand-navy text-sm mb-1 flex items-center gap-2"><i class="ph-fill ph-chart-bar text-brand-green"></i> Suporte Estratégico à Decisão</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. About / Credibility Split Screen -->
+    <section id="sobre" class="py-24 bg-brand-navy text-white overflow-hidden relative">
+        <div class="absolute inset-0 bg-brand-navyLight opacity-20 transform -skew-y-3 scale-110 z-0"></div>
+        <div class="max-w-[1400px] mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="order-2 lg:order-1 reveal-element">
+                    <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32d7?auto=format&fit=crop&q=80&w=800" alt="Consultoria corporativa em escritório" class="rounded-2xl shadow-2xl border border-white/10 w-full object-cover h-[500px]" />
+                </div>
+                <div class="order-1 lg:order-2 reveal-element">
+                    <i class="ph-fill ph-quotes text-5xl text-brand-green/30 mb-6 block"></i>
+                    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-6">Mais que prestadores de serviço. Somos guardiões da saúde da sua empresa.</h2>
+                    <p class="text-slate-300 text-lg leading-relaxed mb-6">
+                        A SRH & SST nasceu da necessidade do mercado por uma atuação técnica, rápida e verdadeiramente resolutiva. Entendemos as dores do empresário e do departamento de RH na interpretação da complexa legislação brasileira.
+                    </p>
+                    <p class="text-slate-300 text-lg leading-relaxed mb-8">
+                        Nosso compromisso não é apenas emitir laudos, mas estabelecer uma cultura de prevenção e organização empresarial, reduzindo passivos trabalhistas e protegendo o seu maior patrimônio: as pessoas.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-8 border-t border-white/10 border-solid">
+                        <div class="flex items-start gap-3">
+                            <i class="ph-fill ph-arrows-merge text-2xl text-brand-green mt-0.5"></i>
+                            <p class="text-sm font-medium text-slate-300">Gestão integrada de RH, Saúde Ocupacional, SST e eSocial</p>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <i class="ph-fill ph-handshake text-2xl text-brand-green mt-0.5"></i>
+                            <p class="text-sm font-medium text-slate-300">Atendimento personalizado e rede de parceiros qualificada</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Peace-of-mind Highlight Band -->
+    <section class="bg-brand-green py-16 relative overflow-hidden">
+        <div class="absolute right-0 top-0 translate-x-1/4 -translate-y-1/4">
+            <i class="ph-fill ph-shield-check text-[300px] text-white/10"></i>
+        </div>
+        <div class="max-w-[1400px] mx-auto px-6 text-center relative z-10 reveal-element">
+            <h2 class="text-2xl md:text-4xl font-extrabold text-white tracking-tight leading-tight max-w-4xl mx-auto">
+                Transformamos obrigações legais em processos organizados, seguros e eficientes.
+            </h2>
+        </div>
+    </section>
+
+    <!-- 8. FAQ Section -->
+    <section class="py-24 bg-white border-b border-slate-100">
+        <div class="max-w-[800px] mx-auto px-6">
+            <div class="text-center mb-16 reveal-element">
+                <h2 class="text-3xl font-bold text-brand-navy tracking-tight mb-4">Dúvidas Frequentes</h2>
+                <p class="text-slate-600">Entenda como a SRH & SST simplifica o dia a dia da sua empresa.</p>
+            </div>
+
+            <div class="space-y-4 reveal-element">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item border border-slate-200 rounded-lg bg-white overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-slate-50 transition-colors">
+                        <span class="font-bold text-brand-navy">Vocês realizam exames ocupacionais?</span>
+                        <i class="ph-bold ph-caret-down text-slate-400 block transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content bg-slate-50 border-t border-slate-100 hidden-initially">
+                        <div class="faq-inner px-6 py-5 text-slate-600 text-sm leading-relaxed">
+                            Trabalhamos com clínicas parceiras qualificadas para a realização dos exames ocupacionais, cuidando do agendamento, do controle dos ASOs e do acompanhamento dos vencimentos.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item border border-slate-200 rounded-lg bg-white overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-slate-50 transition-colors">
+                        <span class="font-bold text-brand-navy">Atendem empresas de qualquer porte?</span>
+                        <i class="ph-bold ph-caret-down text-slate-400 block transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content bg-slate-50 border-t border-slate-100 hidden-initially">
+                        <div class="faq-inner px-6 py-5 text-slate-600 text-sm leading-relaxed">
+                            Sim. Atendemos empresas de pequeno, médio e grande porte, ajustando o serviço à realidade e ao número de colaboradores de cada operação.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item border border-slate-200 rounded-lg bg-white overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-slate-50 transition-colors">
+                        <span class="font-bold text-brand-navy">Vocês fazem gestão do eSocial?</span>
+                        <i class="ph-bold ph-caret-down text-slate-400 block transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content bg-slate-50 border-t border-slate-100 hidden-initially">
+                        <div class="faq-inner px-6 py-5 text-slate-600 text-sm leading-relaxed">
+                            Sim. Acompanhamos as obrigações de SST no eSocial, incluindo os eventos S-2210, S-2220 e S-2240, com controle de pendências e relatórios de conformidade.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item border border-slate-200 rounded-lg bg-white overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-slate-50 transition-colors">
+                        <span class="font-bold text-brand-navy">Atendem fora do Estado do Rio de Janeiro?</span>
+                        <i class="ph-bold ph-caret-down text-slate-400 block transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content bg-slate-50 border-t border-slate-100 hidden-initially">
+                        <div class="faq-inner px-6 py-5 text-slate-600 text-sm leading-relaxed">
+                            Sim. Além da base no Rio de Janeiro, oferecemos atendimento remoto para empresas em todo o território nacional.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item border border-slate-200 rounded-lg bg-white overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-slate-50 transition-colors">
+                        <span class="font-bold text-brand-navy">Vocês elaboram PGR, PCMSO e LTCAT?</span>
+                        <i class="ph-bold ph-caret-down text-slate-400 block transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content bg-slate-50 border-t border-slate-100 hidden-initially">
+                        <div class="faq-inner px-6 py-5 text-slate-600 text-sm leading-relaxed">
+                            Sim. Contamos com profissionais e parceiros especializados para elaborar e gerir os documentos exigidos conforme a necessidade de cada cliente.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="faq-item border border-slate-200 rounded-lg bg-white overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-5 text-left flex justify-between items-center focus:outline-none focus:bg-slate-50 transition-colors">
+                        <span class="font-bold text-brand-navy">A empresa precisa ter RH interno?</span>
+                        <i class="ph-bold ph-caret-down text-slate-400 block transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content bg-slate-50 border-t border-slate-100 hidden-initially">
+                        <div class="faq-inner px-6 py-5 text-slate-600 text-sm leading-relaxed">
+                            Não. Atendemos tanto empresas que já possuem RH próprio quanto aquelas que precisam de suporte completo na gestão de pessoas e SST.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. Lead Capture Section -->
+    <section id="contato" class="py-24 bg-slate-50 relative">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="bg-white rounded-3xl shadow-corporate border border-slate-100 overflow-hidden">
+                <div class="grid lg:grid-cols-5 h-full">
+                    
+                    <!-- Left: Contact Info -->
+                    <div class="lg:col-span-2 bg-brand-navy p-10 md:p-14 text-white relative overflow-hidden flex flex-col justify-between">
+                        <!-- BG elements -->
+                        <div class="absolute inset-0 bg-grid-pattern opacity-10 pointer-events-none"></div>
+                        <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-brand-green rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
+                        
+                        <div class="relative z-10">
+                            <h2 class="text-3xl font-bold tracking-tight mb-4">Pronto para blindar seu negócio?</h2>
+                            <p class="text-slate-300 mb-10 text-sm">
+                                Preencha o formulário para agendarmos uma reunião rápida. Faremos um diagnóstico gratuito da sua estrutura atual de RH e SST.
+                            </p>
+                            
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/20 shrink-0">
+                                        <i class="ph-fill ph-whatsapp text-xl text-brand-green"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">Atendimento Direto</p>
+                                        <a href="#" class="font-bold hover:text-brand-green transition-colors">+55 (21) 90000-0000</a>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-4">
+                                    <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center border border-white/20 shrink-0">
+                                        <i class="ph-fill ph-envelope-simple text-xl text-brand-green"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-400 uppercase tracking-wider font-semibold">E-mail Comercial</p>
+                                        <a href="mailto:contato@srhsst.com.br" class="font-bold hover:text-brand-green transition-colors text-sm">contato@srhsst.com.br</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative z-10 mt-16 pt-8 border-t border-white/20">
+                            <p class="text-sm font-medium text-slate-300 flex items-center gap-2">
+                                <i class="ph-fill ph-clock text-brand-green"></i> Retorno rápido em horário comercial.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Right: Form -->
+                    <div class="lg:col-span-3 p-10 md:p-14 bg-white">
+                        <form id="lead-form" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label for="nome" class="block text-sm font-semibold text-slate-700">Nome Completo <span class="text-brand-green">*</span></label>
+                                    <input type="text" id="nome" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-brand-navy focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-all placeholder:text-slate-400" placeholder="Seu nome">
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="empresa" class="block text-sm font-semibold text-slate-700">Empresa <span class="text-brand-green">*</span></label>
+                                    <input type="text" id="empresa" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-brand-navy focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-all placeholder:text-slate-400" placeholder="Nome da sua empresa">
+                                </div>
+                            </div>
+
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label for="email" class="block text-sm font-semibold text-slate-700">E-mail Corporativo <span class="text-brand-green">*</span></label>
+                                    <input type="email" id="email" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-brand-navy focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-all placeholder:text-slate-400" placeholder="voce@empresa.com.br">
+                                </div>
+                                <div class="space-y-2">
+                                    <label for="telefone" class="block text-sm font-semibold text-slate-700">Telefone / WhatsApp <span class="text-brand-green">*</span></label>
+                                    <input type="tel" id="telefone" required class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-brand-navy focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-all placeholder:text-slate-400" placeholder="(00) 00000-0000">
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label for="mensagem" class="block text-sm font-semibold text-slate-700">Como podemos ajudar? (Opcional)</label>
+                                <textarea id="mensagem" rows="3" class="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-3 text-sm text-brand-navy focus:outline-none focus:border-brand-green focus:ring-1 focus:ring-brand-green transition-all placeholder:text-slate-400 resize-none" placeholder="Ex: Preciso atualizar o PGR e PCMSO para enviar ao eSocial."></textarea>
+                            </div>
+
+                            <button type="submit" class="w-full bg-brand-navy hover:bg-[#121D33] text-white font-bold py-4 rounded-lg transition-colors flex justify-center items-center gap-2 group shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-navy">
+                                Solicitar Diagnóstico Gratuito
+                                <i class="ph-bold ph-paper-plane-right group-hover:translate-x-1 transition-transform"></i>
+                            </button>
+                            <p class="text-center text-xs text-slate-400 font-medium">Seus dados estão seguros conosco. Não enviamos spam.</p>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 10. Footer -->
+    <footer class="bg-brand-navyDark pt-20 pb-10 border-t border-white/5">
+        <div class="max-w-[1400px] mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                
+                <!-- Brand col -->
+                <div class="lg:col-span-1">
+                    <a href="#" class="flex items-center gap-2 mb-6">
+                        <div class="w-8 h-8 rounded shrink-0 bg-brand-green flex items-center justify-center text-white font-bold text-lg">S</div>
+                        <div class="flex flex-col leading-tight">
+                            <span class="font-bold text-white tracking-tight">SRH & SST</span>
+                        </div>
+                    </a>
+                    <p class="text-slate-400 text-sm mb-6 leading-relaxed">
+                        Consultoria empresarial especialista em integrar recursos humanos, saúde ocupacional e conformidade eSocial no Brasil.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-brand-green hover:text-white transition-all"><i class="ph-fill ph-linkedin-logo text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-slate-400 hover:bg-brand-green hover:text-white transition-all"><i class="ph-fill ph-instagram-logo text-xl"></i></a>
+                    </div>
+                </div>
+
+                <!-- Links 1 -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Soluções</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-brand-green transition-colors">Recursos Humanos</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-brand-green transition-colors">Saúde Ocupacional (PCMSO)</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-brand-green transition-colors">Segurança do Trabalho (PGR)</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-brand-green transition-colors">Adequação eSocial SST</a></li>
+                    </ul>
+                </div>
+
+                <!-- Links 2 -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Empresa</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-brand-green transition-colors">Sobre a SRH & SST</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-brand-green transition-colors">Nossos Diferenciais</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-brand-green transition-colors">Dúvidas Frequentes</a></li>
+                        <li><a href="#" class="text-sm text-slate-400 hover:text-brand-green transition-colors">Fale Conosco</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact col -->
+                <div>
+                    <h4 class="text-white font-bold mb-6">Contato</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <i class="ph-fill ph-map-pin text-brand-green mt-1"></i>
+                            <span class="text-sm text-slate-400 leading-relaxed">Rio de Janeiro, RJ<br/>Atendimento em todo território nacional</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="ph-fill ph-envelope-simple text-brand-green"></i>
+                            <a href="mailto:contato@srhsst.com.br" class="text-sm text-slate-400 hover:text-white transition-colors">contato@srhsst.com.br</a>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="ph-fill ph-whatsapp text-brand-green"></i>
+                            <a href="#" class="text-sm text-slate-400 hover:text-white transition-colors">+55 (21) 90000-0000</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-xs text-slate-500 font-medium">
+                    &copy; 2026 SRH & SST Soluções Empresariais. Todos os direitos reservados.
+                </p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-xs text-slate-500 hover:text-slate-300">Termos de Uso</a>
+                    <a href="#" class="text-xs text-slate-500 hover:text-slate-300">Política de Privacidade</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp CTA (Omnipresent) -->
+    <a href="#" class="fixed bottom-6 right-6 w-14 h-14 bg-brand-green text-white rounded-full flex items-center justify-center shadow-[0_8px_20px_-4px_rgba(46,158,58,0.5)] hover:scale-110 hover:bg-brand-greenLight transition-transform duration-300 z-50 group" aria-label="Falar no WhatsApp">
+        <i class="ph-fill ph-whatsapp text-3xl"></i>
+        <!-- Ping effect -->
+        <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-brand-navy border-2 border-brand-green"></span>
+        </span>
+    </a>
+
+    <!-- Frontend Physics & Interactions Controller -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Sticky Header Logic
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    header.classList.add('shadow-sm', 'bg-white/95');
+                    header.classList.remove('bg-white/90', 'border-transparent');
+                } else {
+                    header.classList.remove('shadow-sm', 'bg-white/95');
+                    header.classList.add('bg-white/90');
+                }
+            });
+
+            // 2. Scroll Reveal Intersection Observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Run once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal-element').forEach(el => {
+                observer.observe(el);
+            });
+
+            // 3. FAQ Accordion Logic
+            const faqBtns = document.querySelectorAll('.faq-btn');
+            faqBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const content = this.nextElementSibling;
+                    const icon = this.querySelector('i');
+                    
+                    // Close others
+                    faqBtns.forEach(otherBtn => {
+                        if (otherBtn !== this) {
+                            otherBtn.nextElementSibling.classList.remove('open');
+                            otherBtn.querySelector('i').style.transform = 'rotate(0deg)';
+                            otherBtn.querySelector('span').classList.remove('text-brand-green');
+                        }
+                    });
+
+                    // Toggle current
+                    content.classList.toggle('open');
+                    
+                    if (content.classList.contains('open')) {
+                        icon.style.transform = 'rotate(180deg)';
+                        this.querySelector('span').classList.add('text-brand-green');
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                        this.querySelector('span').classList.remove('text-brand-green');
+                    }
+
+                    // Remove initial hidden class to allow CSS grid transition to work
+                    if(content.classList.contains('hidden-initially')){
+                        content.classList.remove('hidden-initially');
+                        // force reflow
+                        void content.offsetWidth;
+                    }
+                });
+            });
+
+            // Make sure initially hidden items can transition
+            document.querySelectorAll('.faq-content').forEach(el => {
+                el.classList.add('hidden-initially');
+            });
+
+            // 4. Form Submission Simulation
+            const form = document.getElementById('lead-form');
+            if(form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const btn = form.querySelector('button[type="submit"]');
+                    const originalText = btn.innerHTML;
+                    
+                    btn.innerHTML = '<i class="ph-bold ph-spinner animate-spin"></i> Processando...';
+                    btn.classList.add('opacity-80', 'cursor-not-allowed');
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = '<i class="ph-fill ph-check-circle text-xl"></i> Recebemos seu pedido!';
+                        btn.classList.replace('bg-brand-navy', 'bg-brand-green');
+                        form.reset();
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = originalText;
+                            btn.classList.replace('bg-brand-green', 'bg-brand-navy');
+                            btn.classList.remove('opacity-80', 'cursor-not-allowed');
+                        }, 4000);
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

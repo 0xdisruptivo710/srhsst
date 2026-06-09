@@ -1,0 +1,14 @@
+# Artefatos de geração/preview (AIDesigner) e tracking do gstack
+.aidesigner/
+.gstack/
+
+# Dependências e build
+node_modules/
+dist/
+
+# Sistema / editores
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
