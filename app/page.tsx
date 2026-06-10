@@ -55,7 +55,7 @@ export default function Home() {
                 <div className="absolute inset-0 z-10 bg-brand-navy/20 mix-blend-multiply" />
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=800"
+                  src="/images/hero.jpg"
                   alt="Profissionais em reunião estratégica de negócios"
                   className="h-full w-full object-cover"
                 />
@@ -159,7 +159,7 @@ export default function Home() {
             <div className="order-2 lg:order-1">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="https://images.unsplash.com/photo-1556761175-5973dc0f32d7?auto=format&fit=crop&q=80&w=800"
+                src="/images/sobre.jpg"
                 alt="Consultoria corporativa em escritório"
                 className="h-[460px] w-full rounded-2xl border border-white/10 object-cover shadow-2xl"
               />
