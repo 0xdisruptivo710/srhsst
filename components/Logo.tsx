@@ -12,12 +12,12 @@ export default function Logo({
       className="inline-flex items-center"
     >
       {variant === "dark" ? (
-        <span className="inline-flex rounded-lg bg-white px-3 py-2">
+        <span className="inline-flex rounded-xl bg-white px-4 py-2.5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/logo.png"
             alt="SRH & SST Soluções Empresariais"
-            className="h-8 w-auto"
+            className="h-14 w-auto"
           />
         </span>
       ) : (
@@ -25,7 +25,7 @@ export default function Logo({
         <img
           src="/logo.png"
           alt="SRH & SST Soluções Empresariais"
-          className="h-11 w-auto"
+          className="h-14 w-auto"
         />
       )}
     </Link>
