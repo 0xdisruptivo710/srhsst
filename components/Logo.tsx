@@ -5,23 +5,29 @@ export default function Logo({
 }: {
   variant?: "light" | "dark";
 }) {
-  const wordmark = variant === "dark" ? "text-white" : "text-brand-navy";
-  const sub = variant === "dark" ? "text-slate-400" : "text-slate-500";
   return (
-    <Link href="/" className="flex items-center gap-2.5">
-      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-navy shadow-sm">
-        <i className="ph-fill ph-shield-check text-2xl text-brand-green" />
-      </span>
-      <span className="flex flex-col leading-tight">
-        <span className={`font-extrabold tracking-tight ${wordmark}`}>
-          SRH <span className="text-brand-green">&amp; SST</span>
+    <Link
+      href="/"
+      aria-label="SRH & SST Soluções Empresariais — página inicial"
+      className="inline-flex items-center"
+    >
+      {variant === "dark" ? (
+        <span className="inline-flex rounded-lg bg-white px-3 py-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/logo.png"
+            alt="SRH & SST Soluções Empresariais"
+            className="h-8 w-auto"
+          />
         </span>
-        <span
-          className={`text-[10px] font-medium uppercase tracking-wider ${sub}`}
-        >
-          Soluções Empresariais
-        </span>
-      </span>
+      ) : (
+        /* eslint-disable-next-line @next/next/no-img-element */
+        <img
+          src="/logo.png"
+          alt="SRH & SST Soluções Empresariais"
+          className="h-11 w-auto"
+        />
+      )}
     </Link>
   );
 }
